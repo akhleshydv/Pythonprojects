@@ -94,15 +94,15 @@ st.write("Open your webcam to detect age, gender, and distance from the camera."
 # Start the streamer and get the context
 webrtc_ctx = webrtc_streamer(
     key="example",
-    video_transformer_factory=VideoTransformer
+    video_processor_factory=VideoTransformer
 )
 
 result_placeholder = st.empty()
 
 # Poll for results while the streamer is running
-if webrtc_ctx.video_transformer:
+if webrtc_ctx.video_processor:
     while webrtc_ctx.state.playing:
-        result = webrtc_ctx.video_transformer.latest_result
+        result = webrtc_ctx.video_processor.latest_result
         if result:
             result_placeholder.markdown(f"**Latest Detection:** {result}")
         else:
